@@ -1,44 +1,37 @@
 #!/bin/bash
 
-# Kiểm tra xem Python có được cài đặt chưa
-if ! command -v python3 &> /dev/null
-then
-    echo "Python chưa được cài đặt. Bắt đầu cài đặt Python..."
-    
-    # Cài đặt Python cho Ubuntu/Debian
-    if [ -x "$(command -v apt-get)" ]; then
-        sudo apt-get update
-        sudo apt-get install -y python3 python3-pip
-    # Cài đặt Python cho MacOS qua Homebrew
-    elif [ -x "$(command -v brew)" ]; then
-        brew install python
-    else
-        echo "Không thể tìm thấy trình quản lý gói phù hợp. Vui lòng cài đặt Python thủ công."
-        exit 1
-    fi
-fi
+# Kiểm tra hệ điều hành
+OS=$(uname)
 
-# Kiểm tra và cài đặt pip nếu chưa có
-if ! command -v pip3 &> /dev/null
-then
-    echo "pip chưa được cài đặt. Cài đặt pip..."
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python3 get-pip.py
-    rm get-pip.py
-fi
+# Cài đặt cho Ubuntu
+if [[ "$OS" == "Linux" && -f /etc/lsb-release ]]; then
+    echo "Đang cài đặt cho Ubuntu..."
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install python3 python3-pip git -y
+    pip3 install --upgrade pip
+    pip3 install pyotp requests dropbox
 
-# Cài đặt các thư viện từ requirements.txt
-if [ -f "requirements.txt" ]; then
-    pip3 install -r requirements.txt
+# Cài đặt cho macOS
+elif [[ "$OS" == "Darwin" ]]; then
+    echo "Đang cài đặt cho macOS..."
+    brew update
+    brew install python git
+    pip3 install --upgrade pip
+    pip3 install pyotp requests dropbox
+
+# Cài đặt cho Termux
+elif [[ "$OS" == "Linux" && -d /data/data/com.termux ]]; then
+    echo "Đang cài đặt cho Termux..."
+    pkg update && pkg upgrade -y
+    pkg install python -y
+    pip install --upgrade pip
+    pip install pyotp requests dropbox
+
 else
-    echo "Không tìm thấy file requirements.txt."
+    echo "Hệ điều hành không được hỗ trợ."
     exit 1
 fi
 
-# Thiết lập biến môi trường Dropbox access token
-read -p "Nhập Dropbox Access Token của bạn: " DROPBOX_ACCESS_TOKEN
-export DROPBOX_ACCESS_TOKEN="$DROPBOX_ACCESS_TOKEN"
-echo "Đã thiết lập biến môi trường 'DROPBOX_ACCESS_TOKEN'."
-echo 'export DROPBOX_ACCESS_TOKEN='"$DROPBOX_ACCESS_TOKEN" >> ~/.bashrc
+cd CLI-Python-Authenticator || exit
 
-echo "Cài đặt hoàn tất. Bạn có thể chạy dự án!"
+echo "Cài đặt hoàn tất! Bạn có thể chạy dự án CLI Python Authenticator."
