@@ -21,6 +21,16 @@ CLI Python Authenticator là công cụ dòng lệnh giúp tạo mã OTP cho cá
 chmod +x setup.sh
 ./setup.sh
 ```
+### Đối với Android 
+1. Cài Termux từ <a href= "https://termux.dev"></a>
+2. Vào termux cài git
+```bash
+pkg update -y
+pkg upgrade -y
+pkg i git
+git clone https://github.com/quycodergithub/Python-Authenticator-app.git
+```
+3. Chạy file `setup.sh` rồi làm như đã hướng dẫn 
 # LƯU Ý: nhập dropbox accesstoken khi được yêu cầu
 
 ## Cách lấy dropbox access token
