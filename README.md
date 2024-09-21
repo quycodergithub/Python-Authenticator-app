@@ -47,6 +47,9 @@ python pythonauthenticator.py generate <tên hiển thị (cho cái key)>
 ```bash
 python pythonauthenticator.py backup
 ```
+3. Cách restore
+```bash
+python pythonauthenticator.py restore <tên file code 2fa>
 ## Giấy phép
 1. MIT
 ## Các thư viện trong project
