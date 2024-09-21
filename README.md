@@ -13,8 +13,7 @@ CLI Python Authenticator là công cụ dòng lệnh giúp tạo mã OTP cho cá
 ### Đối với Windows
 1. **Cài đặt Python**: Chạy script `setup.bat` để tự động cài đặt **Scoop**, **Python**, và các thư viện cần thiết.
    ```batch
-   setup.bat
-```
+   setup.bat```
 ### Đối vời Mac và Linux
  1. chạy script `setup.sh` đễ cài python và dependentcies
 ```bash
