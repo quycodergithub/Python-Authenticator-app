@@ -22,7 +22,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 ### Đối với Android 
-1. Cài Termux từ <a href= "https://termux.dev"></a>
+1. Cài Termux từ <a href= "https://termux.dev">Termux home page</a>
 2. Vào termux cài git
 ```bash
 pkg update -y
